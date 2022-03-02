@@ -24,6 +24,15 @@ function App() {
     );
   };
 
+  if (quote.status === "fulfilled") {
+    console.log(typeof quote.quote);
+    console.log(quote.quote);
+    console.log(typeof quote.quote.content);
+    console.log(quote.quote.content);
+    console.log(typeof quote.quote.author);
+    console.log(quote.quote.author);
+  }
+
   return (
     <div
       style={{
@@ -63,9 +72,16 @@ function App() {
         >
           <a
             id="tweet-quote"
-            href="twitter.com/intent/tweet"
-            target="_blank"
+            href={
+              quote.status === "fulfilled"
+                ? `https://twitter.com/intent/tweet?text=${
+                    quote.quote.content + " " + quote.quote.author
+                  }&hashtags=quote`
+                : `https://twitter.com/intent/tweet?text=Hello`
+            }
+            target="_top"
             style={{ alignSelf: "center" }}
+            rel="noreferrer"
           >
             <button>
               <i className="fab fa-twitter"></i>
